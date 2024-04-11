@@ -901,7 +901,6 @@ def test_twiss_against_matrix(test_context):
         assert np.allclose(chroma_table.dnqx[1:], dnqx[1:], atol=1e-5, rtol=0)
         assert np.allclose(chroma_table.dnqy[1:], dnqy[1:], atol=1e-5, rtol=0)
 
-
 @for_all_test_contexts
 @pytest.mark.parametrize('machine', ['sps', 'psb'])
 def test_longitudinal_plane_against_matrix(machine, test_context):
@@ -1745,7 +1744,7 @@ def test_second_order_chromaticity_and_dispersion(test_context):
 
     tw = line.twiss(method='4d')
     nlchr = line.get_non_linear_chromaticity(delta0_range=(-1e-4, 1e-4),
-                                             num_delta=21, fit_order=1)
+                                            num_delta=21, fit_order=1, method='4d')
     tw_fw = line.twiss(start='ip4', end='ip6', init_at='ip4',
                 x=tw['x', 'ip4'], px=tw['px', 'ip4'],
                 y=tw['y', 'ip4'], py=tw['py', 'ip4'],
@@ -1769,7 +1768,7 @@ def test_second_order_chromaticity_and_dispersion(test_context):
                 compute_chromatic_properties=True)
 
     nlchr = line.get_non_linear_chromaticity(delta0_range=(-1e-4, 1e-4),
-                                             num_delta=21, fit_order=2)
+                                            num_delta=21, fit_order=2, method='4d')
 
     location = 'ip3'
 
